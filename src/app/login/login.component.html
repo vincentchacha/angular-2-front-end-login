@@ -1,0 +1,27 @@
+<div class="container" id="container">
+    <div class="row">
+      <div class="col-md-4 offset-4">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div>
+                    <h3>Login</h3>
+                </div>
+            </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                      <label for="username">User Name</label>
+                      <input type="text" class="form-control" ([ngModel])="username" id="username"  placeholder="">        
+                    </div>
+                         <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" ([ngModel])="password" id="password"  placeholder="">     
+                         </div>
+               </div>
+                              <div class="panel-footer">
+                                <button class="button btn-primary" (click)="login(username,passwowd)">Log In </button>
+                              </div>
+        </div>
+    </div>
+  </div>
+</div>           
+
