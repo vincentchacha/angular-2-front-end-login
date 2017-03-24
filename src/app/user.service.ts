@@ -1,44 +1,66 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/switchMap';
 import { Observable } from 'rxjs';
+import {USERS} from './data';
+import {USER} from './user';
+//import {SupplierDetailsComponent} from './supplier-details/supplier-details.component';
 //import 'rxjs/operator/*';
 
 @Injectable()
 export class UserService {
   private loggedIn = false;
+  private isAdministrator:boolean=false;
+  token :any='';
+  data=USERS;
+  user:USER;
+  
 
-  constructor(private http: Http) {
-    this.loggedIn = !!localStorage.getItem('auth_token');
+
+  constructor() {
+    //this.loggedIn = !!localStorage.getItem('token');
   }
 
   login(username, password) {
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
+      if(username=='admin' || password=='admin'){
 
-    return this.http
-      .post(
-        '/login', 
-        JSON.stringify({ username, password }), 
-        { headers }
-      )
-      .map(res => res.json())
-      .map((res) => {
-        if (res.success) {
-          localStorage.setItem('auth_token', res.auth_token);
-          this.loggedIn = true;
+        this.token='admin';
+        }else{
+        this.token='user';
         }
-
-        return res.success;
-      });
+       localStorage.setItem('auth',this.token);
+       const response='sucess';
+  return response;
   }
-  
-  logout() {
-    localStorage.removeItem('auth_token');
-    this.loggedIn = false;
-  }
+ getAll(): Promise<USER[]> {
+  return Promise.resolve(USERS);
+}
+getUser(id: string): Promise<USER> {
+  return this.getAll()
+            .then(users => users.find(user => user.id === id));
+}
 
-  isLoggedIn() {
-    return this.loggedIn;
+logout(){
+
+  this.loggedIn=false;
+  localStorage.removeItem('auth');
+}
+  isLoggedIn():boolean{
+        if(localStorage.getItem('auth')){
+        this.loggedIn=true;
+        }
+  return this.loggedIn;
+  }
+  isAdmin():boolean{
+      if(localStorage.getItem('auth')=='admin'){
+      this.isAdministrator=true;
+    
+        }
+    return this.isAdministrator;
+
+  }
+  addUser(user:USER):Promise<void>{
+          return Promise.resolve(this.data)
+          .then(users=>{users.push(user)});
   }
 }

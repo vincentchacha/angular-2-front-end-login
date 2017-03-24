@@ -8,6 +8,9 @@ import {DashboardComponent} from './dashboard/dashboard.component'
 import {UserService} from './user.service';
 import {routes} from './app-routing';
 import {LoggedInGuard} from './auth.guard';
+import {SupplierDetailsComponent} from './supplier-details/supplier-details.component';
+import {AddSupplierComponent} from './add-supplier/add-supplier.component';
+import {EditSupplierComponent} from './edit-supplier/edit-supplier.component';
 
 
 import { AppComponent }         from './app.component';
@@ -21,7 +24,7 @@ import { AppComponent }         from './app.component';
     RouterModule.forRoot(routes)
   ],
   declarations: [
-    AppComponent,LoginComponent,DashboardComponent
+    AppComponent,LoginComponent,DashboardComponent,SupplierDetailsComponent,AddSupplierComponent,EditSupplierComponent
   ],
   providers:[UserService,LoggedInGuard],
  

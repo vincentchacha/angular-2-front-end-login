@@ -1,4 +1,37 @@
-<p>
-  dashboard works!
-  </p>
+<hr>
+ <div class="container">
+    <a *ngIf="isAdmin" [routerLink]="['/add']">Add New</a>
+     <button class="btn btn-link pull-right" (click)="logout()">Logout</button>
+  
+  <div *ngIf="users">
+       <table id="userListTable" class="table table-striped table-bordered row-fluid">
+      <thead class="thead-inverse">
+        <tr>
+          <th>User Id</th>          
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Contacts</th> 
+          <th>Actions</th>         
+        </tr>        
+      </thead>
+      <tbody> 
+        <tr *ngFor="let user of users">
+           <td>{{user.id}}</td>          
+          <td>{{user.fname}}</td>
+          <td>{{user.lname}}</td>
+          <td>{{user.email}}</td>
+          <td>{{user.contacts}}</td> 
+           <td >
+            <a [routerLink]="['/user', user.id]">View</a>
+            <a *ngIf="isAdmin" [routerLink]="['/user/edit', user.id]">Edit</a>
+            <a *ngIf="isAdmin" [routerLink]="['/user/delete', user.id]">Delete</a>
+
+          </td>
+        </tr>
+        </tbody>       
+    </table>
+  </div>
+ </div>
+ 
 

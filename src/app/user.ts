@@ -1,9 +1,10 @@
 export class USER{
-id:number;
+id:string;
 fname:string;
 lname:string;
 username:string;
 password:string;
 email:string;
+contacts:string
 
 }

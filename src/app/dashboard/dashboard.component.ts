@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {USER} from '../user';
 import {Http} from '@angular/http';
 import {UserService} from '../user.service';
+import {USERS} from '../data';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,16 +12,29 @@ import {UserService} from '../user.service';
 
 })
 export class DashboardComponent implements OnInit {
+  private isAdmin:boolean=true;
 
-  users:USER[]=[];
+ users:USER[]=[];
 
-  constructor(
-    private http:Http,
-    private userService:UserService
-  ) { }
+  constructor(private router:Router,private userService:UserService) {
+    const authitem=localStorage.getItem('auth');
+    if(authitem=='admin'){
+      this.isAdmin=true;
+    }else{
+      this.isAdmin=false;
+    }
 
-  ngOnInit():void {
-  
+   }
+
+  ngOnInit():void{
+
+this.userService.getAll()
+  .then(users => this.users = users);
+}
+ 
+  logout(){
+    this.userService.logout();
+    this.router.navigate(['/']);
   }
 
 

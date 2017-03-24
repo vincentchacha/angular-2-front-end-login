@@ -1,0 +1,33 @@
+<div class="container">
+<div *ngIf="isAdmin">
+  <hr>
+<button type="submit"  class="btn btn-secondary" >Edit </button>
+<button type="submit"  class="btn btn-secondary" >Delete </button>
+<hr>
+</div>
+<div *ngIf="user">
+   <div class="row">
+        <div class="col-md-6 offset-3">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div>
+                        <h4>{{user.fname}}  details</h4>
+                    </div>
+                </div>
+
+  <div >
+  <label><strong>First Name </strong></label><div class="label pull-right">{{user.fname}}</div>
+  </div>
+  <div>
+    <label><strong>Last Name</strong></label><div class="label pull-right">{{user.lname}}</div></div>
+  <div>
+    <label><strong>Contacts</strong> </label> <div class="label pull-right">{{user.contacts}}</div></div>
+  <div>
+    <label><strong>Email Address: </strong></label><div class="label pull-right">{{user.email}}</div></div>
+    <button class="btn btn-link pull-right" (click)="back()">Back</button>
+</div>
+</div>
+</div>
+</div>
+
+</div>

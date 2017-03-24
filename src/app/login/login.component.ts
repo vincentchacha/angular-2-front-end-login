@@ -10,18 +10,21 @@ moduleId:module.id,
   styleUrls:['./login.component.css']
 })
 export class LoginComponent {
+  response:string='';
 
   
   
-constructor(private http:Http,private router:Router,private userService:UserService){
+constructor(private router:Router,private userService:UserService){
 }
 
 login(username,password) {
-   this.userService.login(username, password).subscribe((result) => {
-      if (result) {
+   this.response=this.userService.login(username, password);
+   if(this.response=='sucess'){
+        console.log('sucessfuly logged in as admin');
         this.router.navigate(['/dashboard']);
-     }
-    });
+    }else{
+       this.router.navigate(['/']);
+    }
   }
   
 }
